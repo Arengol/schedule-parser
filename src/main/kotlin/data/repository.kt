@@ -19,6 +19,7 @@ data class StudClassData (
 )
 
 fun insertData (studClassData: StudClassData) {
+    println(studClassData.group)
     var groupID: String? = ""
     var timeID: Int? = 0
     var classId = 0
@@ -32,7 +33,7 @@ fun insertData (studClassData: StudClassData) {
             }.resultedValues!!.first()[StudentGroup.name]
         }
     }
-    transaction {
+    transaction {StudentGroup
             timeID =
                 TimeSchedule.select { TimeSchedule.time eq studClassData.time and (TimeSchedule.dayOfWeek eq studClassData.dayWeek) and (TimeSchedule.weekType eq studClassData.weekType)}.limit(1).firstOrNull()?.get(TimeSchedule.id)
         if (timeID == null) {

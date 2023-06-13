@@ -6,6 +6,7 @@ import java.net.URL
 
 
 fun docParser(url: URL): List<StudClassData> {
+    println(url)
     val classData = arrayListOf<StudClassData>()
     val range = HWPFDocument(url.openStream()).range // если будет течь сохрани поток отдельно и закрой его потом
     val groupName = range.getParagraph(0).text().split(" ").last().replace("\r", "")
@@ -79,12 +80,6 @@ fun docParser(url: URL): List<StudClassData> {
                 }
 
                 if (findClass && newClassAlarm) {
-                    studClassName = ""
-                    auditory.clear()
-                    mentor.clear()
-                    studClassName += "$element "
-                    newClassAlarm = false
-
                     classData.add(
                         StudClassData(
                             range.getParagraph(0).text().split(" ").last().replace("\r", ""),
@@ -97,7 +92,11 @@ fun docParser(url: URL): List<StudClassData> {
                             mentor.toList()
                         )
                     )
-
+                    studClassName = ""
+                    auditory.clear()
+                    mentor.clear()
+                    studClassName += "$element "
+                    newClassAlarm = false
                 }
 
                 if (findMentor) {

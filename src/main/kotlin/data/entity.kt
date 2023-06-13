@@ -32,7 +32,7 @@ object TimeSchedule : Table("time_schedule") {
 }
 
 object Auditory : Table("auditory") {
-    val name = varchar("name", 10)
+    val name = varchar("name", 14)
     override val primaryKey = PrimaryKey(name, name = "auditory_pk")
 }
 
@@ -63,7 +63,7 @@ object StudClass : Table("class") {
 
 object ClassAndAuditory : Table("class_and_auditory") {
     val classId = integer("class_id").references(StudClass.id)
-    val auditory = varchar("auditory_name", 10).references(Auditory.name)
+    val auditory = varchar("auditory_name", 14).references(Auditory.name)
 }
 
 object ClassAndGroup : Table("class_and_group") {
